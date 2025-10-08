@@ -1,10 +1,7 @@
 # Project Description - [Project Name Here]
 
 ## Engineered at: 
-CodPop
-
-### by: 
-Ricardo Duarte & Rodrigo Viegas
+CodPop (by Ricardo Duarte & Rodrigo Viegas)
 
 ## Current Version: 
 0.1 - Initial
