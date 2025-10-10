@@ -30,16 +30,16 @@ _Project currently in initial development phase._
 </div>
 
 ##Project organization:
-/project
+project/
 │
 ├── src/
-│   ├── main.ino
+│   └── main.ino          # Main Arduino sketch
 │
 ├── lib/
-│   ├── RTCManager/
+│   ├── RTCManager/       # RTC (DS3231) management library
 │   │   ├── RTCManager.h
 │   │   └── RTCManager.cpp
 │   │
-│   └── NTPManager/
+│   └── NTPManager/       # NTP synchronization library
 │       ├── NTPManager.h
 │       └── NTPManager.cpp
