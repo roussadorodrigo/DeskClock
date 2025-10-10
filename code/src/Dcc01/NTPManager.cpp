@@ -1,74 +1,88 @@
 #include "NTPManager.h"
 
-NTPManager::NTPManager(const char* ntpServer, long gmtOffset, int daylightOffset)
-  : _ntpServer(ntpServer), _gmtOffset(gmtOffset), _daylightOffset(daylightOffset) {}
+#define DEBUG 1
+#define WIFI_CONNECTIONS_MAX_ATTEMPS 20
 
-bool NTPManager::connectWiFi(String ssid, String password) {
-  Serial.print("Conectando ao WiFi");
-  WiFi.begin(ssid.c_str(), password.c_str());
-  int attempts = 0;
-  while (WiFi.status() != WL_CONNECTED && attempts < 20) {
-    delay(500);
-    Serial.print(".");
-    attempts++;
-  }
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\nWiFi conectado!");
-    Serial.print("IP: ");
-    Serial.println(WiFi.localIP());
-    return true;
-  } else {
-    Serial.println("\nFalha ao conectar WiFi.");
-    return false;
-  }
+bool NTPManager_Init(const char* ssidParameter, const char* passwordParameter, const char* ntpServer, long gmtOffset, int dayLightOffset){
+
+  #ifdef DEBUG
+    Serial.print("Insert the ssid: ");
+    const char* ssid = Serial.readStringUntil('\n').c_str();
+
+    Serial.print("Insert the password: ");
+    const char* password = Serial.readStringUntil('\n').c_str();
+  #endif
+
+  if(NTPManager_ConnectWifi(ssidParameter, passwordParameter) == false) return false;
+  
 }
 
-bool NTPManager::syncRTC(RTC_DS3231& rtc) {
-  Serial.println("Sincronizando com servidor NTP...");
-  configTime(_gmtOffset, _daylightOffset, _ntpServer);
-  
-  struct tm timeinfo;
-  if (!getLocalTime(&timeinfo)) {
-    Serial.println("ERRO: Falha ao obter hora do NTP");
+bool NTPManager_ConnectWifi(const char* ssid, const char* password){
+  int wifi_attempts_counter = WIFI_CONNECTIONS_MAX_ATTEMPS; 
+
+  #ifdef DEBUG
+    Serial.print("Connecting to WiFi...");
+  #endif
+
+  WiFi.begin(ssid, password);
+
+  while(WiFi.status() != WL_CONNECTED && wifi_attempts_counter > 0){
+    vTaskDelay(pdMS_TO_TICKS(500));
+    wifi_attempts_counter--;
+  }
+
+  if(WiFi.status() != WL_CONNECTED){
+    #ifdef DEBUG
+      Serial.print("Error: couldn't connect to the WiFi network");
+    #endif
+
     return false;
   }
 
-  rtc.adjust(DateTime(timeinfo.tm_year + 1900,
-                      timeinfo.tm_mon + 1,
-                      timeinfo.tm_mday,
-                      timeinfo.tm_hour,
-                      timeinfo.tm_min,
-                      timeinfo.tm_sec));
+  #ifdef DEBUG
+    Serial.print("Connected to WiFi network: ");
+    Serial.print(ssid);
+    Serial.print("IP Adress: ");
+    Serial.print(WiFi.localIP());
+  #endif
 
-  Serial.println("RTC sincronizado com sucesso!");
-  Serial.printf("Hora NTP: %02d/%02d/%04d %02d:%02d:%02d\n",
-                timeinfo.tm_mday,
-                timeinfo.tm_mon + 1,
-                timeinfo.tm_year + 1900,
-                timeinfo.tm_hour,
-                timeinfo.tm_min,
-                timeinfo.tm_sec);
   return true;
 }
 
-void NTPManager::disconnectWiFi() {
-  WiFi.disconnect(true);
-  WiFi.mode(WIFI_OFF);
+
+tm* NTPManager_NTPGetTime(const long _gmtOffset, const int _daylightOffset, const char*_ntpServer){
+
+  #ifdef DEBUG
+    Serial.println("Synchronizing with NTP server...");
+  #endif
+
+  configTime(_gmtOffset, _daylightOffset, _ntpServer);
+
+  struct tm timeinfo;
+  if (!getLocalTime(&timeinfo)) {
+    Serial.println("Error: couldn't connect to RTC");
+    return NULL;
+  }
+
+  #ifdef DEBUG
+    Serial.print("NTP Time: ");
+    Serial.print(timeinfo.tm_mday);
+    Serial.print("/");
+    Serial.print(timeinfo.tm_mon + 1);
+    Serial.print("/");
+    Serial.print(timeinfo.tm_year + 1900);
+    Serial.print(" - ");
+    Serial.print(timeinfo.tm_hour);
+    Serial.print(":");
+    Serial.print(timeinfo.tm_min);
+    Serial.print(":");
+    Serial.print(timeinfo.tm_sec);
+  #endif
+
+  return &timeinfo;
 }
 
-void NTPManager::getWiFiCredentials(String& ssid, String& password) {
-  Serial.println("\n--- Configuração WiFi ---");
-  Serial.println("Digite o SSID da rede WiFi:");
-  while (Serial.available() == 0) delay(100);
-  ssid = Serial.readStringUntil('\n');
-  ssid.trim();
-
-  while (Serial.available() > 0) Serial.read();
-  Serial.println("Digite a senha da rede WiFi:");
-  while (Serial.available() == 0) delay(100);
-  password = Serial.readStringUntil('\n');
-  password.trim();
-
-  while (Serial.available() > 0) Serial.read();
-  Serial.println("--- Configuração concluída ---\n");
+bool NTPManager_DisconnectWifi(){
+  WiFi.disconnect(true);
+  WiFi.mode(WIFI_OFF);
 }

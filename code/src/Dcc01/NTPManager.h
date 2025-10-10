@@ -3,20 +3,13 @@
 
 #include <WiFi.h>
 #include "time.h"
-#include "RTClib.h"
 
-class NTPManager {
-public:
-  NTPManager(const char* ntpServer = "pool.ntp.org", long gmtOffset = 0, int daylightOffset = 3600);
-  bool connectWiFi(String ssid, String password);
-  bool syncRTC(RTC_DS3231& rtc);
-  void disconnectWiFi();
-  void getWiFiCredentials(String& ssid, String& password);
+bool NTPManager_Init(const char* ssidParameter, const char* passwordParameter, const char* ntpServer, long gmtOffset, int dayLightOffset);
 
-private:
-  const char* _ntpServer;
-  long _gmtOffset;
-  int _daylightOffset;
-};
+bool NTPManager_ConnectWifi(const char* ssid, const char* password);
+
+tm* NTPManager_NTPGetTime(const long _gmtOffset, const int _daylightOffset, const char* _ntpServer);
+
+bool NTPManager_DisconnectWifi();
 
 #endif
