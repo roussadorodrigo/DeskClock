@@ -1,3 +1,7 @@
+#include <Arduino.h>
+#include "RTCManager.h"
+#include "NTPManager.h"
+
 #define QueueSize 10
 #define DEBUG 1
 
