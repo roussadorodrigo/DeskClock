@@ -10,16 +10,17 @@ DCC01-v0.1(Initial)
 08/10/2025
 
 ## End Date:
-...
+In Development
 
 ## Brief Description:
-A desk clock that shows the current time, room temperature, has an alarm function ...
-
+A desk clock that displays the current time, room temperature, and features an alarm function. 
+Built using the Xiao ESP32-S3 microcontroller with DS3231 RTC module for accurate timekeeping and an OLED display for clear visualization.
 ## Hardware Used:
-Xiao ESP32-S3 Microcontroller
-RTC (real time clock) DS3231
-OLED LCD Display 1315 Drive Chip - 128*64 Pixels
+- **Microcontroller:** Xiao ESP32-S3
+- **Real-Time Clock:** DS3231 RTC Module
+- **Display:** OLED LCD 128x64 pixels (SSD1315 Drive Chip)
 ## Software Used:
 Arduino IDE
 
 ## Notes:
+_Project currently in initial development phase._
