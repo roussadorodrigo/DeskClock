@@ -30,15 +30,15 @@ _Project currently in initial development phase._
 </div>
 
 ## Project organization:
-project/
-├── src/
-│   └── main.ino
-│
-└── lib/
-    ├── RTCManager/
-    │   ├── RTCManager.h
-    │   └── RTCManager.cpp
-    │
-    └── NTPManager/
-        ├── NTPManager.h
-        └── NTPManager.cpp
+## Project Structure
+
+- **project/**
+  - **src/**
+    - `main.ino` - Main Arduino sketch
+  - **lib/**
+    - **RTCManager/** - RTC (DS3231) management library
+      - `RTCManager.h`
+      - `RTCManager.cpp`
+    - **NTPManager/** - NTP synchronization library
+      - `NTPManager.h`
+      - `NTPManager.cpp`
