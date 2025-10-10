@@ -29,7 +29,8 @@ _Project currently in initial development phase._
   <img src="images/Dcc01_v1.png" alt="Dcc01 Project" width="400">
 </div>
 
-##Project organization:
+## Project organization:
+
 project/
 │
 ├── src/
