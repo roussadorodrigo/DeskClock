@@ -1,4 +1,4 @@
-# Project Description - [Digital CodClock]
+# Project Description - [ Digital CodClock ]
 
 ## Engineered at: 
 CodPop (by Ricardo Duarte & Rodrigo Viegas)
@@ -15,10 +15,12 @@ In Development
 ## Brief Description:
 A desk clock that displays the current time, room temperature, and features an alarm function. 
 Built using the Xiao ESP32-S3 microcontroller with DS3231 RTC module for accurate timekeeping and an OLED display for clear visualization.
+
 ## Hardware Used:
 - **Microcontroller:** Xiao ESP32-S3
 - **Real-Time Clock:** DS3231 RTC Module
-- **Display:** OLED LCD 128x64 pixels (SSD1315 Drive Chip)
+- **Display:** OLED LCD 128x64 pixels (SSD1315)
+
 ## Software Used:
 Arduino IDE
 
@@ -44,4 +46,4 @@ _Project currently in initial development phase._
 
 
 ## Contact Info
-- For info, contact: r.roussado2@gmail.com
+- For info, contact: codpop.pedals@gmail.com
