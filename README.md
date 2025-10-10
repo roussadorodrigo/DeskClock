@@ -1,4 +1,4 @@
-# Project Description - [Project Name Here]
+# Project Description - [Digital CodClock]
 
 ## Engineered at: 
 CodPop (by Ricardo Duarte & Rodrigo Viegas)
@@ -41,3 +41,7 @@ _Project currently in initial development phase._
     - **NTPManager/** - NTP synchronization library
       - `NTPManager.h`
       - `NTPManager.cpp`
+
+
+## Contact Info
+- For info, contact: r.roussado2@gmail.com

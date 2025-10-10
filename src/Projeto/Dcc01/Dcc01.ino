@@ -21,7 +21,7 @@ QueueHandle_t QueueHandle_NTP;
 QueueHandle_t QueueHandle_LCD;
 
 
-//Mudar quando se decidir as estroturas de dados
+//Mudar quando se decidir as estruturas de dados
 typedef struct {
   char line[10];
   uint8_t line_length;
@@ -50,7 +50,7 @@ void setup()
   xTaskCreate(RTC_Task,"RTC",2048,NULL,1,NULL);
   xTaskCreate(Sensor_Task,"Sensor",2048,NULL,1,NULL);
   xTaskCreate(APP_Task,"APP",2048,NULL,1,NULL);
-  xTaskCreate(Display_Task,"APP",2048,NULL,1,NULL);
+  xTaskCreate(Display_Task,"Display",2048,NULL,1,NULL);
 }
 
 void loop() 
