@@ -24,3 +24,4 @@ Arduino IDE
 
 ## Notes:
 _Project currently in initial development phase._
+![Circuit Diagram](images/Dcc01_v1.png)
