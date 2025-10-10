@@ -24,4 +24,7 @@ Arduino IDE
 
 ## Notes:
 _Project currently in initial development phase._
-![Circuit Diagram](images/Dcc01_v1.png)
+
+<div align="center">
+  <img src="images/Dcc01_v1.png" alt="Dcc01 Project" width="400">
+</div>
