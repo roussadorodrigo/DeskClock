@@ -10,7 +10,7 @@ DCC01-v0.1(Initial)
 08/10/2025
 
 ## End Date:
-In Development
+_Project currently in initial development phase._
 
 ## Brief Description:
 A desk clock that displays the current time, room temperature, and features an alarm function. 
@@ -24,15 +24,12 @@ Built using the Xiao ESP32-S3 microcontroller with DS3231 RTC module for accurat
 ## Software Used:
 Arduino IDE
 
-## Notes:
-_Project currently in initial development phase._
-
+## Project Architecture 
 <div align="center">
   <img src="images/Dcc01_v1.png" alt="Dcc01 Project" width="400">
 </div>
 
 ## Project Structure
-
 - **project/**
   - **src/**
     - `main.ino` - Main Arduino sketch
@@ -44,6 +41,8 @@ _Project currently in initial development phase._
       - `NTPManager.h`
       - `NTPManager.cpp`
 
+## Notes:
+1. We offer the drivers used in the project as a separate folder so these can be used in another projects - Path: code\drivers
 
 ## Contact Info
 - For info, contact: codpop.pedals@gmail.com
