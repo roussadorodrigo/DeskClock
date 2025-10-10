@@ -28,3 +28,18 @@ _Project currently in initial development phase._
 <div align="center">
   <img src="images/Dcc01_v1.png" alt="Dcc01 Project" width="400">
 </div>
+
+##Project organization:
+/project
+│
+├── src/
+│   ├── main.ino
+│
+├── lib/
+│   ├── RTCManager/
+│   │   ├── RTCManager.h
+│   │   └── RTCManager.cpp
+│   │
+│   └── NTPManager/
+│       ├── NTPManager.h
+│       └── NTPManager.cpp
