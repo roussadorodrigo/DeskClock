@@ -13,11 +13,11 @@ bool NTPManager_Init(const char* ssidParameter, const char* passwordParameter, c
     const char* password = Serial.readStringUntil('\n').c_str();
   #endif
 
-  if(NTPManager_ConnectWifi(ssidParameter, passwordParameter) == false) return false;
+  return NTPManager_ConnectWifi(ssidParameter, passwordParameter);
   
 }
 
-bool NTPManager_ConnectWifi(const char* ssid, const char* password){
+static bool NTPManager_ConnectWifi(const char* ssid, const char* password){
   int wifi_attempts_counter = WIFI_CONNECTIONS_MAX_ATTEMPS; 
 
   #ifdef DEBUG
