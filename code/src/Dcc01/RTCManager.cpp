@@ -1,17 +1,26 @@
 #include "RTCManager.h"
 
-RTCManager::RTCManager(int sdaPin, int sclPin)
-  : _sdaPin(sdaPin), _sclPin(sclPin) {}
+#define DEBUG 1
 
-bool RTCManager::begin() {
-  Wire.begin(_sdaPin, _sclPin);
-  if (!rtc.begin()) {
-    Serial.println("ERRO: Não foi possível encontrar o RTC!");
+bool RTCManager_Begin(int sda_pin, int scl_pin){
+  Wire.begin(sda_pin, scl_pin);
+  if (!rtc.begin()){
+
+    #ifdef DEBUG
+      Serial.println("Error: Couldn't find the RTC module");
+    #endif
+
     return false;
   }
-  Serial.println("RTC encontrado!");
+
+  #ifdef DEBUG
+    Serial.println("RTC found");
+  #endif
+
   return true;
 }
+
+
 
 void RTCManager::adjust(DateTime dateTime) {
   rtc.adjust(dateTime);
