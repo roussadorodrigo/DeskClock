@@ -19,7 +19,6 @@
 // WiFi
 const char* ssid = "SEU_SSID";
 const char* password = "SUA_PASSWORD";
-
 // NTP
 const char* ntpServer = "pool.ntp.org";
 const long gmtOffset_sec = 0;
