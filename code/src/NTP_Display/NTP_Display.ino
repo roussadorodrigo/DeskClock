@@ -1,3 +1,8 @@
+/*********
+  Adaptado para XIAO ESP32-S3
+  Rui Santos - https://randomnerdtutorials.com  
+  Display OLED SSD1306 128x64 com NTP
+*********/
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -12,8 +17,8 @@
 #define SCL_PIN 6
 
 // WiFi
-const char* ssid = "barreiro";
-const char* password = "219622343a";
+const char* ssid = "SEU_SSID";
+const char* password = "SUA_PASSWORD";
 
 // NTP
 const char* ntpServer = "pool.ntp.org";
@@ -59,13 +64,12 @@ void initWiFi() {
 }
 
 void initNTP() {
-  // Configura o fuso horário (Portugal é GMT+0 em inverno, GMT+1 em verão)
-  // Para Portugal: "WET0WEST,M3.5.0/1,M10.5.0"
-  
+  // Configura o fuso horário para Portugal (WET/WEST - Horário de Verão Europeu)
+  // GMT+0 em inverno, GMT+1 em verão
   configTime(0, 0, ntpServer);
   setenv("TZ", "WET0WEST,M3.5.0/1,M10.5.0", 1);
   tzset();
-
+  
   Serial.println("Sincronizando hora com NTP...");
   time_t now = time(nullptr);
   int attempts = 0;
@@ -97,6 +101,37 @@ void displayTemp(String temperature) {
   display.setTextSize(1);
   display.setCursor(50, 55);
   display.println(temperature);
+}
+
+void displayWifi(int x, int y) {
+  // Símbolo de WiFi pixelizado 10x10 pixeis
+  
+  // Topo - linha horizontal
+  display.fillRect(x + 2, y, 6, 1, SSD1306_WHITE);
+  
+  // Primeira onda - cantos
+  display.fillRect(x + 1, y + 1, 1, 1, SSD1306_WHITE);
+  display.fillRect(x + 8, y + 1, 1, 1, SSD1306_WHITE);
+  
+  // Primeira onda - linha
+  display.fillRect(x + 2, y + 2, 6, 1, SSD1306_WHITE);
+  
+  // Segunda onda - cantos
+  display.fillRect(x, y + 3, 1, 1, SSD1306_WHITE);
+  display.fillRect(x + 9, y + 3, 1, 1, SSD1306_WHITE);
+  
+  // Segunda onda - linha
+  display.fillRect(x + 2, y + 4, 6, 1, SSD1306_WHITE);
+  
+  // Terceira onda - cantos inferiores
+  display.fillRect(x + 1, y + 5, 1, 1, SSD1306_WHITE);
+  display.fillRect(x + 8, y + 5, 1, 1, SSD1306_WHITE);
+  
+  // Terceira onda - linha
+  display.fillRect(x + 2, y + 6, 6, 1, SSD1306_WHITE);
+  
+  // Ponto central inferior
+  display.fillRect(x + 4, y + 8, 2, 2, SSD1306_WHITE);
 }
 
 void updateDisplay() {
@@ -151,6 +186,7 @@ void loop() {
   displayDate(date);
   displayHour(time);
   displayTemp(temp);
+  displayWifi(115, 3);  // Exibe WiFi no canto superior direito
   
   updateDisplay();
   
